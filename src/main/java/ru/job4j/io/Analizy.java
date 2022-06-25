@@ -12,6 +12,7 @@ public class Analizy {
 
     private final ArrayList <String> list = new ArrayList<>();
     private boolean statusServer = true;
+
     public void unavailable(String source, String target) {
 
 
