@@ -2,12 +2,15 @@ package ru.job4j.io.duplicates;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+
 
 public class DuplicatesFinder {
-
     private static void collector(DuplicatesVisitor visitor) {
-        var map = visitor.getMap();
+        Map<FileProperty, List<Path>> map = visitor.getMap();
         if (!map.isEmpty()) {
             map.entrySet().stream().filter(k -> k.getValue().size() > 1)
                     .forEach(filePropertyListEntry -> {
@@ -19,7 +22,7 @@ public class DuplicatesFinder {
     public static void main(String[] args)  {
         DuplicatesVisitor visitor = new DuplicatesVisitor();
         try {
-            Files.walkFileTree(Paths.get("./data"),
+            Files.walkFileTree(Paths.get("C:\\projects\\job4j_design\\data"),
                     visitor);
         } catch (IOException e) {
             e.printStackTrace();
