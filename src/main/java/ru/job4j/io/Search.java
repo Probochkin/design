@@ -8,9 +8,17 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Search {
-    public static void main(String[] args) throws IOException {
-        Path start = Paths.get("C:\\");
-        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
+    public static void main(String[] args)  {
+        if (args[0] == null) {
+            throw new IllegalArgumentException("Root folder is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
+        }
+        if (args[1] == null) {
+            throw new IllegalArgumentException("File type is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
+        }
+        String path = args[0];
+        String fileTipe = args[1];
+        Path start = Paths.get(path);
+        search(start, p -> p.toFile().getName().endsWith(fileTipe)).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) {

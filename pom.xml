@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.job4j</groupId>
-  <artifactId>job4j_design</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>Search</artifactId>
+  <version>1</version>
 
   <name>job4j_design</name>
 
@@ -24,7 +24,7 @@
     <configuration>
       <archive>
         <manifest>
-          <mainClass>ru.job4j.io.duplicates.DuplicatesFinder</mainClass>
+          <mainClass>ru.job4j.io.Search</mainClass>
         </manifest>
       </archive>
     </configuration>
