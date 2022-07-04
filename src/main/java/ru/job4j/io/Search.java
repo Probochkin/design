@@ -9,15 +9,16 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args)  {
-        if (args[0] == null) {
+        if (args.length < 1) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
         }
-        if (args[1] == null) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("File type is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
         }
+        validate(args);
         String path = args[0];
         String fileTipe = args[1];
-        Path start = Paths.get(path);
+        Path start = Paths.get(path).toAbsolutePath();
         search(start, p -> p.toFile().getName().endsWith(fileTipe)).forEach(System.out::println);
     }
 
@@ -30,5 +31,16 @@ public class Search {
         }
 
         return searcher.getPaths();
+    }
+
+    public static void validate(String[] args) {
+
+        if (!Paths.get(args[0]).isAbsolute()) {
+            throw new IllegalArgumentException("The root folder is specified incorrectly");
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("The file type is specified incorrectly");
+        }
+
     }
 }
