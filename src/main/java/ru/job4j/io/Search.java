@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args)  {
-        if (args[0] == null) {
+        if (args[0] == null || args.length != 2) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
         }
         if (args[1] == null) {
@@ -35,7 +35,7 @@ public class Search {
 
     public static void validate(String[] args) {
 
-        if (!Paths.get(args[0]).isAbsolute()) {
+        if (args[0].matches("^[A-Z]{1}:[\\a-zA-Za-яА-Я0-9]*$") || !Files.exists(Paths.get(args[0]))) {
             throw new IllegalArgumentException("The root folder is specified incorrectly");
         }
         if (!args[1].startsWith(".")) {
