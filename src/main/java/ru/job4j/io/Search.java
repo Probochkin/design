@@ -9,10 +9,10 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args)  {
-        if (args.length < 1) {
+        if (args[0] == null) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
         }
-        if (args.length < 2) {
+        if (args[1] == null) {
             throw new IllegalArgumentException("File type is null. Usage java -jar search-1.jar ROOT_FOLDER File_Type.");
         }
         validate(args);
