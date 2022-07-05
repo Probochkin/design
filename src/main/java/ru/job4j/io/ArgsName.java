@@ -15,24 +15,33 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void parse(String[] args){
+    private void validate(String[] args) {
+        if (args.length < 1) {
+            throw new IllegalArgumentException("Отсутствуют параметры");
+        }
         for (String arg : args) {
-          int index= arg.indexOf("=");
-            String key = arg.substring(0,index);
-            String value = arg.substring(index + 1);
-            if (key.startsWith("-")) {
-                key = key.substring(1);
-            } else {
-                throw new IllegalArgumentException("Аргумент должен начинаться с символа -");
-            };
-
-            if (value.startsWith("-")) {
-                value = value.substring(1);
+            int index = arg.indexOf("=");
+            if (index == -1) {
+                throw new IllegalArgumentException("Отсутствует символ =");
             }
-            if (value.equals("") || key.equals("")) {
-                throw new IllegalArgumentException("Аргументы не заполнены");
-}
-
+            String key;
+            String value = arg.substring(index + 1);
+            if (arg.startsWith("-")) {
+                key = arg.substring(1,index);
+            } else {
+                throw new IllegalArgumentException("Ключ должен начинаться с символа -");
+            }
+            if (value.isBlank() || key.isBlank()) {
+                throw new IllegalArgumentException("Ключ/значение не заполнены");
+            }
+        }
+    }
+    private void parse(String[] args) {
+            validate(args);
+         for (String arg : args) {
+            int index= arg.indexOf("=");
+            String key = arg.substring(1,index);
+            String value = arg.substring(index + 1);
             values.put(key,value);
         }
     }
