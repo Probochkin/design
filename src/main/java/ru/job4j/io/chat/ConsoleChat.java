@@ -2,7 +2,7 @@ package ru.job4j.io.chat;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -21,52 +21,48 @@ public class ConsoleChat {
 
     public void run() {
         boolean run = true;
-       Scanner scanner = new Scanner(System.in);
-        List<String> log = new LinkedList<>();
-        System.out.println("Введите вопрос :");
-        String question = scanner.nextLine();
-        List<String> phrases = new LinkedList<>();
+        Scanner scanner = new Scanner(System.in);
+        List<String> log = new ArrayList<>();
+        System.out.println("Введите сообщение:");
+        String message = scanner.nextLine();
+        List<String> answers = readPhrases();
+        int max = answers.size() - 1;
         while (run) {
-            if (question.equals(STOP)) {
-                System.out.println("Бот остановлен, если хотите продолжить напишите : "+ CONTINUE);
-                while (!question.equals(CONTINUE) && !question.equals(OUT)) {
-                    log.add(question);
-                   question = scanner.nextLine();
+            if (STOP.equals(message)) {
+                System.out.println("Чат остановлен, если хотите продолжить напишите : "+ CONTINUE);
+                while (!CONTINUE.equals(message) && !OUT.equals(message)) {
+                    log.add(message);
+                    message = scanner.nextLine();
                 }
-                if (question.equals(OUT)){
-                    System.out.println("Бот закончил работу");
-                    log.add(question);
-                    run = false;
-                    saveLog(log);
+                if (OUT.equals(message)){
+                    System.out.println("Чат закончил работу");
+                    log.add(message);
+                    break;
                 }
-                log.add(question);
-                System.out.println("Бот запущен напишите вопрос :");
-                question = scanner.nextLine();
+                log.add(message);
+                System.out.println("Чат запущен напишите сообщение :");
+                message = scanner.nextLine();
             }
-            if (OUT.equals(question)) {
-                System.out.println("Бот закончил работу");
-                log.add(question);
-                saveLog(log);
+            if (OUT.equals(message)) {
+                System.out.println("Чат завершил работу");
+                log.add(message);
                 run = false;
             } else {
-                    int max = phrases.size() - 1;
-                    phrases = readPhrases();
-                    log.add(question);
-                    String answer = phrases.get((int) (Math.random() * max));
-                    log.add(answer);
-                    System.out.println(answer);
-                    question = scanner.nextLine();
+                log.add(message);
+                String answer = answers.get((int) (Math.random() * max));
+                log.add(answer);
+                System.out.println(answer);
+                message = scanner.nextLine();
             }
         }
+        saveLog(log);
     }
     private List<String> readPhrases() {
-
-        List<String> result = new LinkedList<>();
+        List<String> result = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
             result = in.lines().collect(Collectors.toList());
-
-    }
-     catch (Exception e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         return result;
@@ -75,14 +71,16 @@ public class ConsoleChat {
     private void saveLog(List<String> log) {
         try (PrintWriter pw = new PrintWriter(
                 new FileWriter(path, Charset.forName("UTF-8"), true))) {
-            pw.println(log);
+            for (String l : log) {
+                pw.println(l);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("C:\\projects\\job4j_design\\data\\log.txt", "C:\\projects\\job4j_design\\data\\ansers.txt");
+        ConsoleChat cc = new ConsoleChat("G:\\Chupin\\Java\\data\\log.txt", "G:\\Chupin\\Java\\data\\answers.txt");
         cc.run();
     }
 }
