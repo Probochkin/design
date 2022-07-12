@@ -14,9 +14,8 @@ public class Zip {
             for (Path a : sources) {
                 zip.putNextEntry(new ZipEntry(a.toString()));
 
-
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(a.toString()))) {
-                    zip.write(out.readAllBytes());
+                  zip.write(out.readAllBytes());
                 }
             }
         } catch (Exception e) {

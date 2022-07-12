@@ -10,7 +10,7 @@ public class ArgsName {
     public String get(String key)  {
 
           if (values.get(key) == null) {
-              throw new IllegalArgumentException("Не корректный ключ");
+              throw new IllegalArgumentException("Не корректный ключ " + key);
         }
         return values.get(key);
     }
