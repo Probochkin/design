@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<student sex="false" age="17" FIO="Petvov">
+    <contactSt phone="895254687" adress="Penza"/>
+    <optionales>
+        <optional>English</optional>
+        <optional>History</optional>
+    </optionales>
+</student> 

@@ -6,8 +6,8 @@ import com.google.gson.GsonBuilder;
 
 public class Main {
     public static void main(String[] args) {
-        final Student student = new Student(false, 30, new ContactSt("+79005554784","Penza"),
-                new String[] {"English", "History"}, "Petrov Ivan Nikolaevich");
+        final Student student = new Student(false, 30,"Petrov Ivan Nikolaevich", new ContactSt("+79005554784","Penza"),
+                new String[] {"English", "History"});
 
 
         final Gson gson = new GsonBuilder().create();
