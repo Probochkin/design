@@ -6,13 +6,13 @@ import com.google.gson.GsonBuilder;
 
 public class Main {
     public static void main(String[] args) {
-        final Student person = new Student(false, 30, new ContactSt("+79005554784","Penza"),
+        final Student student = new Student(false, 30, new ContactSt("+79005554784","Penza"),
                 new String[] {"English", "History"}, "Petrov Ivan Nikolaevich");
 
 
         final Gson gson = new GsonBuilder().create();
-        System.out.println(person);
-        System.out.println(gson.toJson(person));
+        System.out.println(student);
+        System.out.println(gson.toJson(student));
 
 
         final String studentsJson =
