@@ -2,6 +2,9 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
+
+
 
 
 public class Main {
@@ -11,7 +14,7 @@ public class Main {
 
 
         final Gson gson = new GsonBuilder().create();
-        System.out.println(student);
+       System.out.println(student);
         System.out.println(gson.toJson(student));
 
 
@@ -29,6 +32,10 @@ public class Main {
                         +"\"FIO\":\"Fedorov Petr Nikolaevich\""
                         + "}";
         final Student personMod = gson.fromJson(studentsJson, Student.class);
-        System.out.println(personMod);
+        /* JSONObject из json-строки строки */
+        JSONObject jsonContact = new JSONObject(studentsJson);
+        System.out.println(jsonContact);
+        System.out.println(jsonContact.toString());
+
     }
 }
