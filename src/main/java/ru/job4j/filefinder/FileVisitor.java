@@ -26,7 +26,7 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         if ("mask".equals(searchType)) {
-            if (file.getFileName().toString().endsWith(fileType)) {
+            if (mask(file.getFileName().toString(),fileType)) {
                 files.add(file);
             }
         }
@@ -45,5 +45,12 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
 
     public List<Path> getList() {
         return files;
+    }
+
+    private boolean mask(String fileName, String fileMask)
+    {
+        String pattern = fileMask.replace(".", "[.]").replace("*", ".*")
+                .replace("?", ".");
+        return fileName.matches(pattern);
     }
 }
