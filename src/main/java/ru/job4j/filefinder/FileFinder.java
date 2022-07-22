@@ -6,10 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileFinder {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         if (args.length != 4) {
-            throw new IllegalArgumentException("Incorrect arguments. -d=folder path -n=file name, mask, or regular expression " +
-                    "-t=search type: \"mask\" search by mask, \"name\" by full name match, \"regex\" by regular expression -o= name of the file in which to write the results");
+            throw new IllegalArgumentException("Incorrect arguments. -d=folder path -n=file name, mask, or regular expression "
+                    + "-t=search type: \"mask\" search by mask, \"name\" by full name match, \"regex\" by regular expression -o= name of the file in which to write the results");
         }
         ArgsName arguments = ArgsName.of(args);
         validate(arguments);
@@ -17,8 +17,6 @@ public class FileFinder {
         String fileType = arguments.get("n");
         String searchType = arguments.get("t");
         String resultFile = arguments.get("o");
-
-
         FileVisitor fileVisitor = new FileVisitor();
         fileVisitor.setSearchType(searchType);
         fileVisitor.setFileType(fileType);
@@ -34,6 +32,7 @@ public class FileFinder {
             e.printStackTrace();
         }
     }
+
     public static FileVisitor search(Path path, FileVisitor fileVisitor) {
         try {
             Files.walkFileTree(path,
