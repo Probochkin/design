@@ -1,0 +1,16 @@
+insert into type(name) values ('Сыр'),('Молоко'),('Колбасы'),('Мороженое');
+insert into product(name,type_id,expired_date,price) values ('Сыр Мацарелла', 1,date '2022.07.20',500);
+insert into product(name,type_id,expired_date,price) values ('Сыр Адыгейский', 1,date '2022.07.23',32);
+insert into product(name,type_id,expired_date,price) values ('Сыр Маскарпоне', 1,date '2022.07.24',125);
+insert into product(name,type_id,expired_date,price) values ('Сыр Рикотта', 1,date '2022.07.25',543);
+insert into product(name,type_id,expired_date,price) values ('Сыр Тофу', 1,date '2022.07.21',234);
+insert into product(name,type_id,expired_date,price) values ('Сыр Филадельфия', 1,date '2022.07.25',123);
+insert into product(name,type_id,expired_date,price) values ('Сыр Пармезан', 1,date '2022.07.26',1113);
+insert into product(name,type_id,expired_date,price) values ('Сыр Чеддер', 1,date '2022.07.28',546);
+insert into product(name,type_id,expired_date,price) values ('Сыр Российский', 1,date '2022.07.19',521);
+insert into product(name,type_id,expired_date,price) values ('Сыр Гауда', 1,date '2022.07.15',500);
+insert into product(name,type_id,expired_date,price) values ('Молоко 1', 2,date '2022.07.20',100);
+insert into product(name,type_id,expired_date,price) values ('Молоко 2', 2,date '2022.07.24',105);
+insert into product(name,type_id,expired_date,price) values ('Колбаса 1', 3,date '2022.07.24',430);
+insert into product(name,type_id,expired_date,price) values ('Мороженое 1', 4,date '2022.07.24',500);
+insert into product(name,type_id,expired_date,price) values ('Мороженое 2', 4,date '2022.07.26',300);
