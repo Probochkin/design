@@ -11,7 +11,7 @@ public class Cinema3D  implements Cinema {
     }
 
     @Override
-    public Ticket buy(Account account, int row, int column, Calendar date) {
+    public Ticket buy(Account account, int row, Integer column, Calendar date) {
         return null;
     }
 

@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 public interface Cinema {
     List<Session> find(Predicate<Session> filter);
 
-    Ticket buy(Account account, int row, int column, Calendar date);
+    Ticket buy(Account account, int row, Integer column, Calendar date);
 
     void add(Session session);
 }
