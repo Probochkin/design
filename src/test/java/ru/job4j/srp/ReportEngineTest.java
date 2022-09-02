@@ -6,7 +6,65 @@ import static ru.job4j.srp.ReportEngine.DATE_FORMAT;
 import java.util.Calendar;
 
 public class ReportEngineTest {
-
+    @Test
+    public void whenReportJson() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker1 = new Employee("Ivan", now, now, 100);
+        Employee worker2 = new Employee("Petr", now, now, 200);
+        store.add(worker1);
+        store.add(worker2);
+        Report repJson = new ReportJson(store);
+        StringBuilder expect = new StringBuilder()
+                .append("[{\"name\":\"").append(worker1.getName())
+                .append("\",\"hired\":{\"year\":").append(now.get(Calendar.YEAR))
+                .append(",\"month\":").append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":").append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":").append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":").append(now.get(Calendar.MINUTE))
+                .append(",\"second\":").append(now.get(Calendar.SECOND))
+                .append("},\"fired\":{\"year\":").append(now.get(Calendar.YEAR))
+                .append(",\"month\":").append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":").append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":").append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":").append(now.get(Calendar.MINUTE))
+                .append(",\"second\":").append(now.get(Calendar.SECOND))
+                .append("},\"salary\":").append(worker1.getSalary())
+                .append("},{\"name\":\"").append(worker2.getName())
+                .append("\",\"hired\":{\"year\":").append(now.get(Calendar.YEAR))
+                .append(",\"month\":").append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":").append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":").append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":").append(now.get(Calendar.MINUTE))
+                .append(",\"second\":").append(now.get(Calendar.SECOND))
+                .append("},\"fired\":{\"year\":").append(now.get(Calendar.YEAR))
+                .append(",\"month\":").append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":").append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":").append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":").append(now.get(Calendar.MINUTE))
+                .append(",\"second\":").append(now.get(Calendar.SECOND))
+                .append("},\"salary\":").append(worker2.getSalary()).append("}]");
+        assertThat(repJson.generate(em -> true)).isEqualTo(expect.toString());
+    }
+    @Test
+    public void whenXmlGenerated() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        ReportXml xml = new ReportXml(store);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>").append(System.lineSeparator())
+                .append("<employers>").append(System.lineSeparator())
+                .append("<employer>").append(System.lineSeparator())
+                .append("<name>").append(worker.getName()).append("</name>").append(System.lineSeparator())
+                .append("<hired>").append(worker.getHired()).append("</hired>").append(System.lineSeparator())
+                .append("<fired>").append(worker.getFired()).append("</fired>").append(System.lineSeparator())
+                .append("<salary>").append(worker.getSalary()).append("</salary>").append(System.lineSeparator())
+                .append("</employer>").append(System.lineSeparator())
+                .append("</employers>").append(System.lineSeparator());
+        assertThat(xml.generate(em -> true)).isEqualTo(expect.toString());
+    }
     @Test
     public void whenOldGenerated() {
         MemStore store = new MemStore();
