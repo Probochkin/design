@@ -24,4 +24,14 @@ public class Trash implements Store {
     public Food get(int index) {
         return foods.get(index);
     }
+
+    @Override
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    @Override
+    public void clear() {
+        foods.clear();
+    }
 }

@@ -71,4 +71,20 @@ class StoreTest {
         assertThat(food, is(trash.get(0)));
     }
 
+    @Test
+    public void whenResortProduct() {
+        Warehouse warehouse = new Warehouse();
+        Shop shop = new Shop();
+        Trash trash = new Trash();
+        List<Store> storages = List.of(warehouse, shop, trash);
+        ControlQuality controllQuality = new ControlQuality(storages);
+        LocalDate now = LocalDate.now();
+        Date created = java.sql.Date.valueOf(now.minusDays(10));
+        Date expaired = java.sql.Date.valueOf(now.minusDays(2));
+        Food food = new Food("Milk", expaired, created, 56.0, 0);
+        warehouse.foods.add(food);
+        controllQuality.resort();
+        assertThat(food, is(trash.get(0)));
+    }
+
 }
